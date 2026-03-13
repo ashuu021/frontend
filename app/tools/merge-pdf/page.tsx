@@ -27,7 +27,8 @@ export default function MergePDFPage() {
       });
 
       // Create download link
-      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const blob = response.data instanceof Blob ? response.data : new Blob([response.data], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', 'merged_by_pdf_ai.pdf');
